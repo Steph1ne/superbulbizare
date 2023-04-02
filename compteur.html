@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperBulbizare - Compteur d'abonnés</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>SuperBulbizare - Gaming YouTube</h1>
+    <nav>
+        <a href="index.html" id="home-link">Accueil</a>
+        <a href="videos.html">Vidéos</a>
+        <a href="shorts.html">Shorts</a>
+        <a href="compteur.html">Compteur d'abonnés</a>
+        <a href="store.html">Boutique</a>
+        <a href="live.html">Live</a>
+        <a href="event.html">Event</a>
+        <a href="chat.html">Chat</a>
+        <a href="idees.html">Idées de vidéos</a>
+    </nav>
+</header>
+  <main>
+    <section id="subscriber-count">
+      <h2>Nombre d'abonnés</h2>
+      <div id="count">Chargement...</div>
+    </section>
+  </main>
+  <footer>
+    <!-- Ajoutez votre code de pied de page ici -->
+  </footer>
+
+  <script>
+    // Remplacez YOUR_API_KEY par votre clé API YouTube Data
+    const apiKey = "AIzaSyDMPRMuGwPUAk5d3mxWhRTcHMH3NUu9yP8";
+    // Remplacez YOUR_CHANNEL_ID par l'ID de votre chaîne YouTube
+    const channelId = "UChBgbtBpoRD5mA-9Jo9yeFQ";
+
+    async function fetchSubscriberCount() {
+      const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`);
+      const data = await response.json();
+      const count = data.items[0].statistics.subscriberCount;
+      document.getElementById("count").textContent = count;
+    }
+
+    fetchSubscriberCount();
+  </script>
+</body>
+</html>
